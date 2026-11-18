@@ -411,6 +411,13 @@ h1, h2, h3, h4, .brand-name { font-family: "Aptos Display", "Aptos", "Segoe UI V
 .about-photo-label strong, .about-photo-label small { display: block; }
 .about-photo-label strong { font-size: 12px; }
 .about-photo-label small { margin-top: 2px; color: #c5d5e7; font-size: 10px; }
+.about-company-story { width: min(1200px, calc(100% - 48px)); margin: 0 auto; display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(38px, 7vw, 96px); padding: 0 0 82px; }
+.about-company-story-heading { position: sticky; top: 120px; align-self: start; }
+.about-company-story-heading .eyebrow { margin-bottom: 12px; }
+.about-company-story-heading h2 { max-width: 410px; margin: 0; color: var(--navy); font-size: clamp(30px, 3.7vw, 42px); line-height: 1.12; letter-spacing: -1.4px; }
+.about-company-story-copy { max-width: 690px; padding-left: 27px; border-left: 2px solid var(--cyan); }
+.about-company-story-copy p { margin: 0 0 17px; color: #4c5f76; font-size: 16px; line-height: 1.82; }
+.about-company-story-copy p:last-child { margin-bottom: 0; }
 .about-purpose { padding: 76px max(24px, calc((100% - 1200px) / 2)) 68px; background: radial-gradient(ellipse at 95% 0, rgba(20,104,216,.55), transparent 35%), linear-gradient(115deg, #071c3c, #0b2b51 72%, #103b60); color: white; }
 .about-purpose-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 70px; }
 .about-purpose-heading .eyebrow, .about-people-copy .eyebrow, .about-final-cta .eyebrow { color: #bdeffc; }
@@ -454,6 +461,7 @@ h1, h2, h3, h4, .brand-name { font-family: "Aptos Display", "Aptos", "Segoe UI V
   .about-page-hero { min-height: 560px; gap: 28px; }
   .about-page-copy h1 { font-size: clamp(46px, 6vw, 62px); letter-spacing: -3px; }
   .about-purpose-inner, .about-people { gap: 38px; }
+  .about-company-story { gap: 35px; }
   .about-capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .about-profile-links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
@@ -463,6 +471,11 @@ h1, h2, h3, h4, .brand-name { font-family: "Aptos Display", "Aptos", "Segoe UI V
   .about-page-lede { font-size: 18px; }
   .about-page-visual { width: min(100%, 420px); justify-self: center; }
   .about-photo-label { right: -1%; bottom: 7%; }
+  .about-company-story { width: min(100% - 36px, 600px); grid-template-columns: 1fr; gap: 20px; padding-bottom: 56px; }
+  .about-company-story-heading { position: static; }
+  .about-company-story-heading h2 { font-size: 34px; }
+  .about-company-story-copy { padding-left: 18px; }
+  .about-company-story-copy p { font-size: 15px; }
   .about-purpose { padding: 56px 18px; }
   .about-purpose-inner { grid-template-columns: 1fr; gap: 12px; }
   .about-purpose-heading h2, .about-people-copy h2 { font-size: 38px; }
