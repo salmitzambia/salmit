@@ -11,6 +11,117 @@ document.querySelectorAll(".site-nav a[href], .header-cta[href]").forEach((link)
   }
 });
 
+const siteSearchEntries = [
+  { title: "Home", url: "index.html", detail: "Discover Salmit Zambia and our technology solutions.", terms: "welcome overview technology solutions zambia salmit" },
+  { title: "IT equipment supply", url: "services.html#equipment", detail: "Computers, printers, servers, networking and more.", terms: "equipment computer laptop printer scanner server storage networking accessories ups cctv biometric" },
+  { title: "IT services and support", url: "services.html#it-services", detail: "Technical support, installation, cybersecurity and systems development.", terms: "support maintenance installation network lan cabling cloud email cyber security software development management systems cctv access control backup recovery solar gps fleet phone" },
+  { title: "IT consultancy, AI and databases", url: "services.html#consultancy", detail: "Technology advice, AI consultancy, data analytics and database solutions.", terms: "consultancy advisory assessment digital transformation artificial intelligence ai automation chatbot analytics reporting database sql nosql migration optimization" },
+  { title: "IT training", url: "services.html#training", detail: "Professional IT training and practical technology skills.", terms: "training courses skills professional digital computer education" },
+  { title: "All services", url: "services.html", detail: "Explore equipment, IT services, consultancy and training.", terms: "services solutions what we do" },
+  { title: "About Salmit", url: "about.html", detail: "Learn about our company, expertise and approach.", terms: "about company zambian owned story team profile" },
+  { title: "Our clients", url: "clients.html", detail: "Meet some of the organizations we have worked with.", terms: "clients partnerships organizations portfolio" },
+  { title: "Request a quotation", url: "quote.html", detail: "Tell us about your requirements and request a quotation.", terms: "quote quotation estimate pricing cost request" },
+  { title: "Contact Salmit", url: "contact.html", detail: "Call, WhatsApp, email or visit our Lusaka office.", terms: "contact phone call whatsapp email address office lusaka location directions" },
+  { title: "Our mission", url: "mission.html", detail: "Read about Salmit’s mission.", terms: "mission purpose" },
+  { title: "Our vision", url: "vision.html", detail: "Read about Salmit’s vision.", terms: "vision future" },
+  { title: "Our values", url: "values.html", detail: "Explore the values that guide our work.", terms: "values principles integrity professionalism" },
+  { title: "Why choose Salmit", url: "why-choose-us.html", detail: "Learn what makes Salmit a trusted technology partner.", terms: "why choose trust reliable partner advantages" },
+  { title: "Our commitment", url: "commitment.html", detail: "Learn about our commitment to clients and quality service.", terms: "commitment quality service clients" },
+  { title: "Privacy and analytics", url: "privacy.html", detail: "Read our privacy information and analytics details.", terms: "privacy analytics data cookies consent clarity" },
+];
+
+const headerInner = document.querySelector(".header-inner");
+if (headerInner && !headerInner.querySelector(".site-search-trigger")) {
+  const searchTrigger = document.createElement("button");
+  searchTrigger.className = "site-search-trigger";
+  searchTrigger.type = "button";
+  searchTrigger.setAttribute("aria-label", "Search this website");
+  searchTrigger.setAttribute("aria-haspopup", "dialog");
+  searchTrigger.setAttribute("aria-expanded", "false");
+  searchTrigger.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.4"></circle><path d="m15.5 15.5 4.1 4.1"></path></svg><span>Search</span>';
+  const headerCta = headerInner.querySelector(".header-cta");
+  headerInner.insertBefore(searchTrigger, headerCta || null);
+
+  const searchOverlay = document.createElement("div");
+  searchOverlay.className = "site-search-overlay";
+  searchOverlay.hidden = true;
+  searchOverlay.innerHTML = '<div class="site-search-backdrop" data-search-dismiss></div><section class="site-search-dialog" role="dialog" aria-modal="true" aria-labelledby="site-search-title"><div class="site-search-heading"><div><span class="site-search-eyebrow">SALMIT ZAMBIA</span><h2 id="site-search-title">What are you looking for?</h2></div><button class="site-search-close" type="button" aria-label="Close search">&times;</button></div><form class="site-search-form" role="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.4"></circle><path d="m15.5 15.5 4.1 4.1"></path></svg><input class="site-search-input" type="search" name="q" placeholder="Search services, equipment, support..." autocomplete="off" aria-label="Search Salmit Zambia"><kbd>ESC</kbd></form><p class="site-search-hint" aria-live="polite">Popular pages and services</p><ul class="site-search-results" id="site-search-results"></ul><div class="site-search-footer"><span>Search Salmit Zambia</span><span>Use keywords like <b>IT support</b> or <b>training</b></span></div></section>';
+  document.body.appendChild(searchOverlay);
+
+  const searchInput = searchOverlay.querySelector(".site-search-input");
+  const searchResults = searchOverlay.querySelector(".site-search-results");
+  const searchHint = searchOverlay.querySelector(".site-search-hint");
+  const closeSearch = () => {
+    searchOverlay.hidden = true;
+    searchTrigger.setAttribute("aria-expanded", "false");
+    searchTrigger.focus();
+  };
+  const renderSearchResults = () => {
+    const query = searchInput.value.trim().toLowerCase();
+    const words = query.split(/\s+/).filter(Boolean);
+    const matches = siteSearchEntries.map((entry) => {
+      const title = entry.title.toLowerCase();
+      const content = `${entry.detail} ${entry.terms}`.toLowerCase();
+      const score = words.reduce((total, word) => total + (title.includes(word) ? 3 : 0) + (content.includes(word) ? 1 : 0), 0);
+      return { entry, score };
+    }).filter((result) => !words.length || result.score === words.length || result.score > words.length)
+      .sort((a, b) => b.score - a.score || a.entry.title.localeCompare(b.entry.title))
+      .slice(0, 6);
+    searchResults.replaceChildren();
+    if (!matches.length) {
+      const empty = document.createElement("li");
+      empty.className = "site-search-empty";
+      empty.textContent = "No matches yet. Try a service, product or page name.";
+      searchResults.appendChild(empty);
+      searchHint.textContent = "No results for that search";
+      return;
+    }
+    searchHint.textContent = words.length ? `${matches.length} helpful ${matches.length === 1 ? "result" : "results"}` : "Popular pages and services";
+    matches.forEach(({ entry }) => {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = entry.url;
+      const copy = document.createElement("span");
+      copy.className = "site-search-result-copy";
+      const title = document.createElement("strong");
+      title.textContent = entry.title;
+      const detail = document.createElement("small");
+      detail.textContent = entry.detail;
+      copy.append(title, detail);
+      const arrow = document.createElement("span");
+      arrow.className = "site-search-result-arrow";
+      arrow.setAttribute("aria-hidden", "true");
+      arrow.textContent = "↗";
+      link.append(copy, arrow);
+      item.appendChild(link);
+      searchResults.appendChild(item);
+    });
+  };
+  const openSearch = () => {
+    searchOverlay.hidden = false;
+    searchTrigger.setAttribute("aria-expanded", "true");
+    renderSearchResults();
+    searchInput.focus();
+  };
+  searchTrigger.addEventListener("click", openSearch);
+  searchInput.addEventListener("input", renderSearchResults);
+  searchOverlay.querySelector(".site-search-close").addEventListener("click", closeSearch);
+  searchOverlay.querySelector("[data-search-dismiss]").addEventListener("click", closeSearch);
+  searchOverlay.querySelector(".site-search-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const firstResult = searchResults.querySelector("a[href]");
+    if (firstResult) window.location.href = firstResult.href;
+  });
+  document.addEventListener("keydown", (event) => {
+    if ((event.key === "k" && (event.ctrlKey || event.metaKey)) && searchOverlay.hidden) {
+      event.preventDefault();
+      openSearch();
+    } else if (event.key === "Escape" && !searchOverlay.hidden) {
+      closeSearch();
+    }
+  });
+}
+
 const quoteForm = document.getElementById("quote-form");
 if (quoteForm) {
   quoteForm.addEventListener("submit", (event) => {
