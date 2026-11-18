@@ -387,6 +387,10 @@ h1, h2, h3, h4, .brand-name { font-family: "Aptos Display", "Aptos", "Segoe UI V
   .analytics-consent { max-height: min(70vh, 420px); overflow-y: auto; }
 }
 
+/* Use the official Salmit logo mark in the shared header and footer */
+.brand-mark { overflow: hidden; border: 1px solid rgba(20,104,216,.14); background: #fff url("service-images/salmit-mark.png") center / contain no-repeat; color: transparent; font-size: 0; }
+.brand-footer .brand-mark { border-color: rgba(50,217,241,.4); background: #fff url("service-images/salmit-mark.png") center / contain no-repeat; }
+
 /* About page: editorial story, clear left alignment and vivid brand accents */
 .about-page-main { display: block; overflow: hidden; background: radial-gradient(ellipse at 90% 5%, rgba(50,217,241,.17), transparent 25%), linear-gradient(145deg, #f5faff 0%, #fff 44%, #eef4ff 100%); }
 .about-page-hero { width: min(1200px, calc(100% - 48px)); min-height: 650px; margin: auto; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: clamp(34px, 6vw, 80px); padding: 70px 0 78px; }
