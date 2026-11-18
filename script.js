@@ -18,6 +18,9 @@ if (quoteForm) {
     if (!quoteForm.reportValidity()) return;
 
     const data = new FormData(quoteForm);
+    if (window.salmitTrackEvent) {
+      window.salmitTrackEvent("quote_request_prepared", { service_type: data.get("service") });
+    }
     const lines = [
       "Quotation request for Salmit Zambia",
       `Name: ${data.get("name")}`,
@@ -48,6 +51,7 @@ if (quoteForm) {
   });
 }
 
+// Add the GA4 Measurement ID and Clarity Project ID for Salmit's analytics accounts.
 const GA4_MEASUREMENT_ID = "";
 const CLARITY_PROJECT_ID = "";
 const ANALYTICS_CONSENT_KEY = "salmit-analytics-consent";
@@ -63,6 +67,7 @@ if (hasGA4 || hasClarity) {
   } catch {
     consentChoice = null;
   }
+  let analyticsConsented = consentChoice === "granted";
 
   const startAnalytics = () => {
     if (window.salmitAnalyticsStarted) return;
@@ -101,6 +106,7 @@ if (hasGA4 || hasClarity) {
   };
 
   const saveConsent = (choice) => {
+    analyticsConsented = choice === "granted";
     try {
       localStorage.setItem(ANALYTICS_CONSENT_KEY, choice);
     } catch {
@@ -122,6 +128,31 @@ if (hasGA4 || hasClarity) {
   const showAnalyticsPreferences = () => {
     if (analyticsBanner) analyticsBanner.hidden = false;
   };
+
+  const trackAnalyticsEvent = (eventName, parameters = {}) => {
+    if (!analyticsConsented) return;
+    if (hasGA4 && window.gtag) window.gtag("event", eventName, parameters);
+    if (hasClarity && window.clarity) window.clarity("event", eventName);
+  };
+  window.salmitTrackEvent = trackAnalyticsEvent;
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href]");
+    if (!link) return;
+
+    const destination = new URL(link.href, window.location.href);
+    if (destination.pathname.endsWith("/quote.html")) {
+      trackAnalyticsEvent("quote_cta_click", { link_text: link.textContent.trim() });
+    } else if (destination.pathname.endsWith("/services.html") && destination.hash) {
+      trackAnalyticsEvent("service_interest", { service_section: destination.hash.slice(1) });
+    } else if (destination.protocol === "tel:") {
+      trackAnalyticsEvent("contact_click", { contact_method: "phone" });
+    } else if (destination.hostname === "wa.me") {
+      trackAnalyticsEvent("contact_click", { contact_method: "whatsapp" });
+    } else if (destination.protocol === "mailto:") {
+      trackAnalyticsEvent("contact_click", { contact_method: "email" });
+    }
+  });
 
   document.querySelectorAll(".footer-bottom").forEach((footer) => {
     const settingsButton = document.createElement("button");
