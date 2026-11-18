@@ -123,6 +123,71 @@ if (headerInner && !headerInner.querySelector(".site-search-trigger")) {
 }
 
 const quoteForm = document.getElementById("quote-form");
+const equipmentGallery = document.querySelector(".equipment-gallery");
+if (equipmentGallery) {
+  const galleryImages = [...equipmentGallery.querySelectorAll("img")];
+  const galleryItems = galleryImages.map((image, index) => {
+    if (!image.alt.trim()) image.alt = `IT equipment photo ${index + 1}`;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "equipment-gallery-item";
+    button.setAttribute("aria-label", `View IT equipment photo ${index + 1} of ${galleryImages.length}`);
+    image.parentNode.insertBefore(button, image);
+    button.appendChild(image);
+    const marker = document.createElement("span");
+    marker.className = "equipment-gallery-marker";
+    marker.setAttribute("aria-hidden", "true");
+    marker.textContent = String(index + 1).padStart(2, "0");
+    button.appendChild(marker);
+    return button;
+  });
+
+  const lightbox = document.createElement("div");
+  lightbox.className = "equipment-lightbox";
+  lightbox.hidden = true;
+  lightbox.setAttribute("role", "dialog");
+  lightbox.setAttribute("aria-modal", "true");
+  lightbox.setAttribute("aria-labelledby", "equipment-lightbox-title");
+  lightbox.innerHTML = '<div class="equipment-lightbox-backdrop" data-lightbox-close></div><div class="equipment-lightbox-content"><div class="equipment-lightbox-toolbar"><span id="equipment-lightbox-title">Equipment gallery</span><span class="equipment-lightbox-count" aria-live="polite"></span><button class="equipment-lightbox-close" type="button" aria-label="Close image viewer">&times;</button></div><div class="equipment-lightbox-stage"><button class="equipment-lightbox-nav equipment-lightbox-prev" type="button" aria-label="Previous photo">&#8592;</button><img class="equipment-lightbox-image" alt=""><button class="equipment-lightbox-nav equipment-lightbox-next" type="button" aria-label="Next photo">&#8594;</button></div><p class="equipment-lightbox-caption"></p></div>';
+  document.body.appendChild(lightbox);
+  const lightboxImage = lightbox.querySelector(".equipment-lightbox-image");
+  const lightboxCount = lightbox.querySelector(".equipment-lightbox-count");
+  const lightboxCaption = lightbox.querySelector(".equipment-lightbox-caption");
+  let activePhoto = 0;
+  let lastGalleryTrigger = null;
+
+  const showPhoto = (index) => {
+    activePhoto = (index + galleryItems.length) % galleryItems.length;
+    const source = galleryImages[activePhoto];
+    lightboxImage.src = source.currentSrc || source.src;
+    lightboxImage.alt = source.alt;
+    lightboxCount.textContent = `${String(activePhoto + 1).padStart(2, "0")} / ${String(galleryItems.length).padStart(2, "0")}`;
+    lightboxCaption.textContent = source.alt;
+  };
+  const closeLightbox = () => {
+    lightbox.hidden = true;
+    document.body.classList.remove("has-open-lightbox");
+    lightboxImage.removeAttribute("src");
+    if (lastGalleryTrigger) lastGalleryTrigger.focus();
+  };
+  galleryItems.forEach((button, index) => button.addEventListener("click", () => {
+    lastGalleryTrigger = button;
+    showPhoto(index);
+    lightbox.hidden = false;
+    document.body.classList.add("has-open-lightbox");
+    lightbox.querySelector(".equipment-lightbox-close").focus();
+  }));
+  lightbox.querySelector(".equipment-lightbox-close").addEventListener("click", closeLightbox);
+  lightbox.querySelector("[data-lightbox-close]").addEventListener("click", closeLightbox);
+  lightbox.querySelector(".equipment-lightbox-prev").addEventListener("click", () => showPhoto(activePhoto - 1));
+  lightbox.querySelector(".equipment-lightbox-next").addEventListener("click", () => showPhoto(activePhoto + 1));
+  lightbox.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeLightbox();
+    if (event.key === "ArrowLeft") showPhoto(activePhoto - 1);
+    if (event.key === "ArrowRight") showPhoto(activePhoto + 1);
+  });
+}
+
 if (quoteForm) {
   quoteForm.addEventListener("submit", (event) => {
     event.preventDefault();
