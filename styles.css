@@ -390,16 +390,21 @@ h1, h2, h3, h4, .brand-name { font-family: "Aptos Display", "Aptos", "Segoe UI V
 /* Use the official Salmit logo mark in the shared header and footer */
 .brand-mark { overflow: hidden; border: 1px solid rgba(20,104,216,.14); background: #fff url("service-images/salmit-mark.png") center / contain no-repeat; color: transparent; font-size: 0; }
 .brand-footer .brand-mark { border-color: rgba(50,217,241,.4); background: #fff url("service-images/salmit-mark.png") center / contain no-repeat; }
+.brand-logo-lockup { display: flex; flex-direction: column; align-items: center; gap: 0; }
 .brand-logo { display: block; width: 190px; height: 56px; object-fit: contain; }
 .brand-footer .brand-logo { width: 205px; height: 60px; }
+.brand-tagline { display: block; margin-top: -2px; color: #365575; font-size: 8px; font-weight: 850; letter-spacing: 1.8px; line-height: 1.15; text-align: center; text-transform: uppercase; }
+.brand-footer .brand-tagline { color: var(--cyan); }
 @media (max-width: 950px) {
   .brand-logo { width: 170px; height: 50px; }
 }
 @media (max-width: 720px) {
   .brand-logo, .brand-footer .brand-logo { width: 160px; height: 47px; }
+  .brand-tagline { font-size: 7px; letter-spacing: 1.5px; }
 }
 @media (max-width: 420px) {
   .brand-logo, .brand-footer .brand-logo { width: 145px; height: 43px; }
+  .brand-tagline { font-size: 6.5px; letter-spacing: 1.3px; }
 }
 
 /* About page: editorial story, clear left alignment and vivid brand accents */
