@@ -127,7 +127,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .contact-banner > div > p:last-child { margin: 9px 0 0; color: var(--muted); font-size: 13px; }
 
 /* Interior pages */
-.interior-main { display: flex; flex: 1; flex-direction: column; background: linear-gradient(145deg, #f5f8fb, #fff 60%, #edf5f8); }
+.interior-main { display: flex; flex: 1; flex-direction: column; background: radial-gradient(ellipse at 8% 14%, rgba(66,196,223,.15), transparent 30%), radial-gradient(ellipse at 92% 78%, rgba(243,184,80,.1), transparent 28%), linear-gradient(135deg, #eaf4f9 0%, #f4f7fb 48%, #edf5f3 100%); }
 .standalone-layout { width: min(1200px, calc(100% - 48px)); min-height: 0; flex: 1; margin: auto; display: grid; place-items: center; padding: 62px 0; }
 .standalone-card { width: min(100%, 760px); padding: clamp(30px, 5vw, 58px); border: 1px solid var(--line); border-radius: 8px; background: white; box-shadow: var(--shadow); }
 .content-heading { display: flex; align-items: center; gap: 13px; }
