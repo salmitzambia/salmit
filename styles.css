@@ -17,7 +17,7 @@
 }
 * { box-sizing: border-box; }
 html { min-width: 320px; scroll-behavior: smooth; scroll-padding-top: 96px; }
-body { display: flex; min-height: 100vh; flex-direction: column; margin: 0; background: var(--white); color: var(--ink); font: 16px/1.65 "Aptos", "Segoe UI Variable", "Segoe UI", system-ui, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { display: flex; min-height: 100vh; flex-direction: column; margin: 0; background: var(--white); color: var(--ink); font: 16px/1.65 "IBM Plex Sans", "Segoe UI", system-ui, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
 #main-content { flex: 1; }
 img { display: block; max-width: 100%; }
 a { color: inherit; }
@@ -366,7 +366,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 }
 
 /* Readable typography with a refined, system-native font stack */
-h1, h2, h3, h4, .brand-name { font-family: "Aptos Display", "Aptos", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif; }
+h1, h2, h3, h4, .brand-name { font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; }
 .site-nav a { font-size: 14px; }
 .header-cta { font-size: 13px; }
 .hero-lede, .content-card p, .service-block p, .about-band-copy > p:not(.eyebrow), .values-intro > p:not(.eyebrow) { font-size: 16px; }
