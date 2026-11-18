@@ -11,11 +11,16 @@ Pages
 - clients.html: Current client list
 - contact.html: Phone, WhatsApp, email and office location
 - quote.html: Quotation request form that prepares a WhatsApp message
+- privacy.html: Analytics and enquiry privacy information
 
 Assets
 - styles.css: Shared visual system and responsive layouts
 - script.js: Current year, active navigation and quotation message flow
 - favicon.svg: Salmit browser icon
 - service-images/: Service and equipment photography
+- robots.txt and sitemap.xml: Search engine crawl guidance and page index
 
 Keep the website content and contact details current. Only publish client names and logos that Salmit Zambia is authorized to share. Replace any social profile links only after the official URLs are confirmed.
+
+SEO and analytics
+Page titles, descriptions, canonical URLs and sharing metadata use https://salmit.vercel.app. Update these along with robots.txt and sitemap.xml if the production domain changes. Google Analytics 4 is consent-gated in script.js; set GA4_MEASUREMENT_ID to the property's G-XXXXXXXXXX ID before enabling analytics collection.
