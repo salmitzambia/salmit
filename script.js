@@ -51,6 +51,50 @@ if (quoteForm) {
   });
 }
 
+const onlineChat = document.createElement("div");
+onlineChat.className = "online-chat-widget";
+onlineChat.innerHTML = '<section class="online-chat-panel" id="online-chat-panel" role="dialog" aria-labelledby="online-chat-title" hidden><div class="online-chat-heading"><div><span class="online-chat-kicker">SALMIT ZAMBIA</span><h2 id="online-chat-title">How can we help?</h2></div><button class="online-chat-close" type="button" aria-label="Close chat">&times;</button></div><p class="online-chat-intro">Send our team a message on WhatsApp. Your message will be ready for you to review before you send it.</p><form class="online-chat-form" id="online-chat-form" data-clarity-mask="true"><label for="online-chat-message">Your message</label><textarea id="online-chat-message" name="message" rows="4" maxlength="1000" required placeholder="Type your question here..."></textarea><button class="online-chat-submit" type="submit">Continue to WhatsApp <span aria-hidden="true">&#8599;</span></button><p class="online-chat-note" id="online-chat-status" role="status" aria-live="polite"></p></form></section><button class="online-chat-launcher" type="button" aria-controls="online-chat-panel" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.75A2.75 2.75 0 0 1 6.75 3h10.5A2.75 2.75 0 0 1 20 5.75v7.5A2.75 2.75 0 0 1 17.25 16H9l-5 4v-6.5z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/><path d="M8 8h8M8 11.5h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/></svg><span>Chat with us</span></button>';
+document.body.appendChild(onlineChat);
+
+const chatPanel = onlineChat.querySelector(".online-chat-panel");
+const chatLauncher = onlineChat.querySelector(".online-chat-launcher");
+const chatMessage = onlineChat.querySelector("#online-chat-message");
+const chatStatus = onlineChat.querySelector("#online-chat-status");
+const setChatOpen = (isOpen) => {
+  chatPanel.hidden = !isOpen;
+  chatLauncher.setAttribute("aria-expanded", String(isOpen));
+  if (isOpen) chatMessage.focus();
+  else chatLauncher.focus();
+};
+
+chatLauncher.addEventListener("click", () => setChatOpen(chatPanel.hidden));
+onlineChat.querySelector(".online-chat-close").addEventListener("click", () => setChatOpen(false));
+onlineChat.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !chatPanel.hidden) setChatOpen(false);
+});
+onlineChat.querySelector("#online-chat-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const message = chatMessage.value.trim();
+  if (!message) {
+    chatMessage.focus();
+    return;
+  }
+  if (window.salmitTrackEvent) window.salmitTrackEvent("contact_click", { contact_method: "whatsapp_chat" });
+  const whatsappUrl = `https://wa.me/260770336134?text=${encodeURIComponent(message)}`;
+  const opened = window.open(whatsappUrl, "_blank");
+  if (opened) {
+    opened.opener = null;
+    chatStatus.textContent = "WhatsApp is ready with your message. Review it and press send to contact our team.";
+    return;
+  }
+  const link = document.createElement("a");
+  link.href = whatsappUrl;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = "Open your WhatsApp message";
+  chatStatus.replaceChildren(link, document.createTextNode(" and press send to contact our team."));
+});
+
 // Add the GA4 Measurement ID and Clarity Project ID for Salmit's analytics accounts.
 const GA4_MEASUREMENT_ID = "";
 const CLARITY_PROJECT_ID = "";
