@@ -17,7 +17,7 @@
 }
 * { box-sizing: border-box; }
 html { min-width: 320px; scroll-behavior: smooth; scroll-padding-top: 96px; }
-body { display: flex; min-height: 100vh; flex-direction: column; margin: 0; background: var(--white); color: var(--ink); font: 16px/1.65 Inter, "Aptos", "Segoe UI", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { display: flex; min-height: 100vh; flex-direction: column; margin: 0; background: var(--white); color: var(--ink); font: 16px/1.65 "Aptos", "Segoe UI Variable", "Segoe UI", system-ui, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
 #main-content { flex: 1; }
 img { display: block; max-width: 100%; }
 a { color: inherit; }
@@ -161,7 +161,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .service-block p { max-width: 760px; margin: 8px 0; color: var(--muted); font-size: 13px; }
 .service-block ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 22px; margin: 14px 0 0; padding: 0; list-style: none; }
 .service-block li { position: relative; padding: 7px 5px 7px 20px; color: #405169; font-size: 12px; line-height: 1.5; break-inside: avoid; }
-.service-block li::before { position: absolute; left: 2px; color: var(--blue); content: "•"; }
+.service-block li::before { position: absolute; left: 2px; color: var(--blue); content: "\2022"; }
 .equipment-list-continuation { margin-top: 0 !important; }
 .service-gallery { display: grid; gap: 13px; margin: 22px 0; }
 .equipment-gallery { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
@@ -321,4 +321,26 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* Readable typography with a refined, system-native font stack */
+h1, h2, h3, h4, .brand-name { font-family: "Aptos Display", "Aptos", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif; }
+.site-nav a { font-size: 14px; }
+.header-cta { font-size: 13px; }
+.hero-lede, .content-card p, .service-block p, .about-band-copy > p:not(.eyebrow), .values-intro > p:not(.eyebrow) { font-size: 16px; }
+.service-card p { font-size: 14px; }
+.service-block li, .content-card li { font-size: 14px; }
+.form-field { font-size: 13px; }
+.field-optional { font-size: 11px; }
+.form-field input, .form-field select, .form-field textarea { font-size: 15px; }
+.form-note, .quote-alternative { font-size: 12px !important; }
+.footer-links a, .footer-contact a, .footer-contact span { font-size: 13px; }
+.analytics-consent { border-top: 3px solid var(--cyan); }
+.consent-copy h2 { font-size: 16px; }
+.consent-copy p { font-size: 13px; }
+.consent-actions button { font-size: 13px; }
+@media (max-width: 720px) {
+  .site-nav a { font-size: 13px; }
+  .service-card p { font-size: 13px; }
+  .analytics-consent { max-height: min(70vh, 420px); overflow-y: auto; }
 }

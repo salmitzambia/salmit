@@ -49,9 +49,13 @@ if (quoteForm) {
 }
 
 const GA4_MEASUREMENT_ID = "";
+const CLARITY_PROJECT_ID = "";
 const ANALYTICS_CONSENT_KEY = "salmit-analytics-consent";
 
-if (/^G-[A-Z0-9]+$/.test(GA4_MEASUREMENT_ID)) {
+const hasGA4 = /^G-[A-Z0-9]+$/.test(GA4_MEASUREMENT_ID);
+const hasClarity = /^[a-z0-9]+$/i.test(CLARITY_PROJECT_ID);
+
+if (hasGA4 || hasClarity) {
   let analyticsBanner;
   let consentChoice = null;
   try {
@@ -63,24 +67,37 @@ if (/^G-[A-Z0-9]+$/.test(GA4_MEASUREMENT_ID)) {
   const startAnalytics = () => {
     if (window.salmitAnalyticsStarted) return;
     window.salmitAnalyticsStarted = true;
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
-    window.gtag("consent", "default", {
-      analytics_storage: "denied",
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-    });
-    window.gtag("consent", "update", { analytics_storage: "granted" });
-    window.gtag("js", new Date());
-    window.gtag("config", GA4_MEASUREMENT_ID, {
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false,
-    });
-    const analyticsScript = document.createElement("script");
-    analyticsScript.async = true;
-    analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA4_MEASUREMENT_ID)}`;
-    document.head.appendChild(analyticsScript);
+    if (hasGA4) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      window.gtag("consent", "default", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      });
+      window.gtag("consent", "update", { analytics_storage: "granted" });
+      window.gtag("js", new Date());
+      window.gtag("config", GA4_MEASUREMENT_ID, {
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+      });
+      const analyticsScript = document.createElement("script");
+      analyticsScript.async = true;
+      analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA4_MEASUREMENT_ID)}`;
+      document.head.appendChild(analyticsScript);
+    }
+    if (hasClarity) {
+      (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = `https://www.clarity.ms/tag/${i}`;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", CLARITY_PROJECT_ID);
+      window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "granted" });
+    }
   };
 
   const saveConsent = (choice) => {
@@ -98,6 +115,7 @@ if (/^G-[A-Z0-9]+$/.test(GA4_MEASUREMENT_ID)) {
         ad_personalization: "denied",
       });
     }
+    if (choice === "denied" && window.clarity) window.clarity("consent", false);
     if (analyticsBanner) analyticsBanner.hidden = true;
   };
 
@@ -118,7 +136,8 @@ if (/^G-[A-Z0-9]+$/.test(GA4_MEASUREMENT_ID)) {
   analyticsBanner.className = "analytics-consent";
   analyticsBanner.setAttribute("role", "dialog");
   analyticsBanner.setAttribute("aria-labelledby", "analytics-consent-title");
-  analyticsBanner.innerHTML = '<div class="consent-copy"><h2 id="analytics-consent-title">Help us improve this website</h2><p>Allow Google Analytics to measure visits and site usage. Analytics only starts if you accept. <a href="privacy.html">Privacy details</a></p></div><div class="consent-actions"><button class="consent-accept" type="button">Accept analytics</button><button class="consent-decline" type="button">Decline</button></div>';
+  const analyticsTools = [hasGA4 && "Google Analytics", hasClarity && "Microsoft Clarity"].filter(Boolean).join(" and ");
+  analyticsBanner.innerHTML = `<div class="consent-copy"><h2 id="analytics-consent-title">Help us improve this website</h2><p>Allow ${analyticsTools} to measure visits and understand site usage. These tools only start if you accept. <a href="privacy.html">Privacy details</a></p></div><div class="consent-actions"><button class="consent-accept" type="button">Accept analytics</button><button class="consent-decline" type="button">Decline</button></div>`;
   analyticsBanner.querySelector(".consent-accept").addEventListener("click", () => saveConsent("granted"));
   analyticsBanner.querySelector(".consent-decline").addEventListener("click", () => saveConsent("denied"));
   document.body.appendChild(analyticsBanner);
