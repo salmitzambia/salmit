@@ -10,10 +10,11 @@ Pages
 - vision.html, mission.html, values.html, why-choose-us.html and commitment.html: Company profile pages
 - clients.html: Current client list
 - contact.html: Phone, WhatsApp, email and office location
+- quote.html: Quotation request form that prepares a WhatsApp message
 
 Assets
 - styles.css: Shared visual system and responsive layouts
-- script.js: Current year and active navigation state
+- script.js: Current year, active navigation and quotation message flow
 - favicon.svg: Salmit browser icon
 - service-images/: Service and equipment photography
 

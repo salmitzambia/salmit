@@ -193,6 +193,43 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .contact-address strong { display: block; color: var(--navy); font-size: 13px; }
 .contact-address address { margin-top: 5px; color: var(--muted); font-size: 12px; font-style: normal; }
 .contact-address a { display: inline-block; margin-top: 10px; color: var(--blue); font-size: 11px; font-weight: 750; text-decoration: none; }
+.contact-quote-link { margin: -8px 0 17px; }
+.quote-layout { width: min(1200px, calc(100% - 48px)); grid-template-columns: minmax(0, 1.5fr) minmax(250px, .8fr); align-items: start; justify-items: stretch; gap: 28px; }
+.quote-card { width: 100%; max-width: none; padding: clamp(28px, 4vw, 48px); }
+.quote-card > h1 { margin-bottom: 10px; }
+.quote-card .contact-lede { margin-top: 0; }
+.quote-form { margin-top: 24px; }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px 14px; }
+.form-field { display: block; color: var(--navy); font-size: 11px; font-weight: 800; }
+.form-field > span:not(.field-optional) { display: inline; color: #c04444; }
+.field-optional { float: right; color: #8a97a7; font-size: 9px; font-weight: 600; }
+.form-field-wide { grid-column: 1 / -1; }
+.form-field input, .form-field select, .form-field textarea { display: block; width: 100%; min-height: 45px; margin-top: 7px; padding: 11px 12px; border: 1px solid #d7e0e9; border-radius: 4px; background: #fff; color: var(--ink); font: inherit; font-size: 12px; font-weight: 450; }
+.form-field textarea { min-height: 128px; resize: vertical; }
+.form-field input::placeholder, .form-field textarea::placeholder { color: #98a4b2; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--blue); outline: 3px solid rgba(23,101,173,.12); }
+.form-note { margin: 16px 0 18px; color: #748196; font-size: 10px !important; line-height: 1.6 !important; }
+.form-submit { border: 0; cursor: pointer; font: inherit; font-size: 12px; }
+.form-status { min-height: 0; margin: 0; color: #235c40 !important; font-size: 12px !important; font-weight: 700; }
+.form-status:not(:empty) { margin-top: 14px; padding: 12px; border: 1px solid #b7ddc5; border-radius: 4px; background: #f0faf3; }
+.quote-alternative { margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
+.quote-alternative a { color: var(--blue); font-weight: 700; text-decoration: none; }
+.quote-alternative a:hover { text-decoration: underline; }
+.quote-alternative > span { margin: 0 6px; color: #98a4b2; }
+.quote-aside { position: sticky; top: 108px; padding: 26px 22px; border: 1px solid #dce8ee; border-radius: 5px; background: #f7fbfc; }
+.quote-aside .eyebrow { margin-bottom: 12px; font-size: 9px; }
+.quote-aside h2 { margin: 0; color: var(--navy); font-size: 24px; line-height: 1.17; letter-spacing: -.7px; }
+.quote-aside ol { display: grid; gap: 19px; margin: 25px 0 0; padding: 0; list-style: none; }
+.quote-aside li { display: flex; align-items: start; gap: 12px; }
+.quote-aside li > span { display: grid; width: 26px; height: 26px; flex: 0 0 26px; place-items: center; border-radius: 50%; background: #e2f4f8; color: var(--blue); font-size: 9px; font-weight: 850; }
+.quote-aside li p { margin: 0; }
+.quote-aside li strong, .quote-aside li small { display: block; }
+.quote-aside li strong { color: var(--navy); font-size: 11px; }
+.quote-aside li small { margin-top: 4px; color: var(--muted); font-size: 10px; line-height: 1.6; }
+.quote-aside-contact { display: grid; gap: 5px; margin-top: 24px; padding-top: 16px; border-top: 1px solid #dce8ee; }
+.quote-aside-contact span { margin-bottom: 3px; color: var(--muted); font-size: 10px; }
+.quote-aside-contact a { color: var(--blue); font-size: 11px; font-weight: 750; text-decoration: none; }
+.quote-aside-contact a:hover { text-decoration: underline; }
 
 @media (max-width: 950px) {
   .header-inner { gap: 18px; }
@@ -251,6 +288,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .service-gallery img { height: 135px; }
   .service-final-cta { align-items: start; flex-direction: column; padding: 21px; }
   .contact-options { grid-template-columns: 1fr; }
+  .quote-layout { grid-template-columns: 1fr; gap: 20px; }
+  .quote-aside { position: static; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-field-wide { grid-column: auto; }
 }
 @media (max-width: 420px) {
   .header-cta { width: 40px; flex: 0 0 40px; gap: 0; padding: 0; font-size: 0; }
