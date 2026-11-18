@@ -163,8 +163,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .content-card p { color: #596a7f; font-size: 14px; line-height: 1.85; }
 .content-card > div:not(.content-heading) > p:first-child { margin-top: 0; }
 .content-card ul, .content-card ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 24px 0 0; padding: 0; list-style: none; }
-.content-card li { position: relative; min-height: 48px; display: flex; align-items: center; padding: 11px 14px 11px 37px; border: 1px solid #e5ebf1; border-radius: 4px; background: #fbfcfd; color: var(--ink); font-size: 12px; font-weight: 650; line-height: 1.4; }
-.content-card li::before { position: absolute; left: 15px; color: var(--blue); font-weight: 900; content: "✓"; }
+.content-card li { position: relative; min-height: 54px; display: flex; align-items: center; padding: 12px 15px 12px 44px; border: 1px solid #e3eaf1; border-radius: 8px; background: linear-gradient(135deg, #fff, #f7fbfd); color: var(--ink); font-size: 12px; font-weight: 650; line-height: 1.45; box-shadow: 0 5px 15px rgba(7,28,60,.035); }
+.content-card li::before { position: absolute; left: 14px; top: 50%; display: grid; width: 20px; height: 20px; transform: translateY(-50%); place-items: center; border: 1px solid #bceef5; border-radius: 50%; background: #e6faff; color: var(--blue); font-size: 11px; font-weight: 900; content: "✓"; }
 .return-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; color: var(--blue); font-size: 12px; font-weight: 800; text-decoration: none; }
 .return-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 .profile-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 24px; }
@@ -175,7 +175,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .interior-footer .footer-main { padding-top: 30px; padding-bottom: 26px; }
 .interior-footer .footer-bottom { padding-top: 13px; padding-bottom: 13px; }
 .clients-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.clients-list li { min-height: 70px; font-size: 14px; }
+.clients-list li { min-height: 70px; padding-left: 42px; border-color: #e1e9f0; border-radius: 8px; background: linear-gradient(135deg, #fff, #f5faff); font-size: 14px; }
+.clients-list li::before { top: 50%; width: 9px; height: 9px; transform: translateY(-50%); border: 0; background: var(--cyan); box-shadow: 0 0 0 4px #e3f9fc; content: ""; }
 
 /* Services */
 .services-layout { display: block; padding-top: 52px; padding-bottom: 76px; }
@@ -496,3 +497,7 @@ h1, h2, h3, h4, .brand-name { font-family: "Aptos Display", "Aptos", "Segoe UI V
   .about-profile-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .about-final-cta { align-items: flex-start; flex-direction: column; padding: 42px 20px; }
 }
+
+/* Branded markers for service checklists */
+.service-block li { padding: 8px 7px 8px 30px; color: #344960; font-size: 14px; line-height: 1.6; }
+.service-block li::before { top: 11px; left: 2px; display: grid; width: 18px; height: 18px; place-items: center; border: 1px solid #bceef5; border-radius: 50%; background: #e6faff; color: var(--blue); font-size: 10px; font-weight: 900; content: "✓"; }
