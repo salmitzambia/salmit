@@ -83,8 +83,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .hero-proof { display: flex; align-items: center; gap: 10px; margin-top: 37px; color: #b0c2d8; font-size: 11px; letter-spacing: .3px; }
 .proof-icon { display: grid; width: 21px; height: 21px; place-items: center; border: 1px solid rgba(66,196,223,.6); border-radius: 50%; color: var(--cyan); font-size: 11px; }
 .hero-visual { position: relative; width: min(100%, 470px); justify-self: end; padding: 12px 12px 26px 26px; }
-.hero-visual::before { position: absolute; inset: 0 27px 36px 0; border: 1px solid rgba(66,196,223,.55); border-radius: 3px; content: ""; }
-.hero-visual > img { position: relative; z-index: 1; width: 100%; aspect-ratio: 1 / 1.04; border-radius: 3px; object-fit: cover; object-position: 54% center; box-shadow: 0 24px 55px rgba(0,0,0,.32); }
+.hero-visual::before { position: absolute; inset: 0 27px 36px 0; border: 1px solid rgba(66,196,223,.55); border-radius: 14px; content: ""; }
+.hero-visual > img { position: relative; z-index: 1; width: 100%; aspect-ratio: 1 / 1.04; border: 1px solid rgba(255,255,255,.72); border-radius: 14px; object-fit: cover; object-position: 54% center; box-shadow: 0 24px 55px rgba(0,0,0,.32); }
 .visual-caption { position: absolute; z-index: 2; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px; min-width: 278px; padding: 16px 19px; border: 1px solid rgba(255,255,255,.1); background: #102b50; box-shadow: 0 12px 34px rgba(0,0,0,.22); }
 .caption-mark { display: grid; width: 38px; height: 38px; flex: 0 0 38px; place-items: center; border-radius: 50%; background: rgba(66,196,223,.12); color: var(--cyan); font-size: 12px; font-weight: 900; }
 .visual-caption strong, .visual-caption small { display: block; }
@@ -105,8 +105,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .service-card p { max-width: 240px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
 .card-arrow { position: absolute; right: 22px; bottom: 20px; color: var(--blue); font-size: 18px; }
 .about-band { display: grid; grid-template-columns: 1fr 1fr; min-height: 430px; background: var(--navy); color: white; }
-.about-band-image { position: relative; min-height: 390px; overflow: hidden; background: #e9eef3; }
-.about-band-image img { width: 100%; height: 100%; min-height: 390px; object-fit: contain; }
+.about-band-image { position: relative; min-height: 390px; overflow: hidden; background: radial-gradient(ellipse at center, #fff 0%, #f3f8fb 58%, #e3f1f5 100%); }
+.about-band-image img { width: 100%; height: 100%; min-height: 390px; padding: clamp(22px, 5vw, 58px); object-fit: contain; }
 .image-note { position: absolute; right: 0; bottom: 0; padding: 12px 18px; background: rgba(7,28,60,.9); color: white; font-size: 10px; letter-spacing: .5px; }
 .about-band-copy { align-self: center; max-width: 600px; padding: 62px clamp(36px, 7vw, 100px); }
 .about-band-copy h2 { margin: 0; font-size: clamp(32px, 4vw, 47px); line-height: 1.12; letter-spacing: -1.6px; }
@@ -166,8 +166,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .service-gallery { display: grid; gap: 13px; margin: 22px 0; }
 .equipment-gallery { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
 .feature-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.service-gallery img { width: 100%; height: 170px; border: 1px solid var(--line); border-radius: 5px; background: #f6f8fa; object-fit: cover; }
+.service-gallery img { width: 100%; height: 170px; overflow: hidden; border: 1px solid #dbe5ee; border-radius: 10px; background: #f6f8fa; object-fit: cover; box-shadow: 0 8px 24px rgba(8,30,61,.08); transition: transform .24s ease, box-shadow .24s ease; }
+.service-gallery img:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(8,30,61,.14); }
 .feature-gallery img { height: clamp(170px, 25vw, 260px); }
+.equipment-gallery img { padding: 12px; background: linear-gradient(145deg, #fff, #f2f7fa); object-fit: contain; }
 .equipment-gallery[hidden] { display: none; }
 .gallery-toggle { display: inline-flex; align-items: center; gap: 9px; margin: 14px 0 5px; padding: 10px 13px; border: 1px solid var(--line); border-radius: 4px; background: white; color: var(--blue); cursor: pointer; font: inherit; font-size: 12px; font-weight: 750; }
 .gallery-toggle:hover { border-color: var(--blue); background: var(--paper); }
