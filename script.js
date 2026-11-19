@@ -123,6 +123,47 @@ if (headerInner && !headerInner.querySelector(".site-search-trigger")) {
 }
 
 const quoteForm = document.getElementById("quote-form");
+const servicesCarousel = document.querySelector("[data-service-carousel]");
+if (servicesCarousel) {
+  const servicesTrack = servicesCarousel.querySelector(".service-cards");
+  const serviceSlides = [...servicesTrack.querySelectorAll(".service-card")];
+  const previousServices = servicesCarousel.querySelector(".service-carousel-prev");
+  const nextServices = servicesCarousel.querySelector(".service-carousel-next");
+  const servicesStatus = servicesCarousel.querySelector(".service-carousel-status");
+  let statusTimer;
+
+  const getSlideStep = () => {
+    const gap = Number.parseFloat(getComputedStyle(servicesTrack).columnGap) || 0;
+    return (serviceSlides[0]?.getBoundingClientRect().width || servicesTrack.clientWidth) + gap;
+  };
+  const updateServicesCarousel = (announce = false) => {
+    const maxScroll = Math.max(0, servicesTrack.scrollWidth - servicesTrack.clientWidth);
+    previousServices.disabled = servicesTrack.scrollLeft <= 2;
+    nextServices.disabled = servicesTrack.scrollLeft >= maxScroll - 2;
+    if (!announce) return;
+    const step = getSlideStep();
+    const firstVisible = Math.min(serviceSlides.length, Math.round(servicesTrack.scrollLeft / step) + 1);
+    const visibleCount = Math.max(1, Math.ceil(servicesTrack.clientWidth / step));
+    const lastVisible = Math.min(serviceSlides.length, firstVisible + visibleCount - 1);
+    servicesStatus.textContent = `Showing services ${firstVisible}–${lastVisible} of ${serviceSlides.length}`;
+  };
+  const moveServices = (direction) => {
+    servicesTrack.scrollBy({
+      left: direction * getSlideStep(),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+  };
+  previousServices.addEventListener("click", () => moveServices(-1));
+  nextServices.addEventListener("click", () => moveServices(1));
+  servicesTrack.addEventListener("scroll", () => {
+    updateServicesCarousel();
+    window.clearTimeout(statusTimer);
+    statusTimer = window.setTimeout(() => updateServicesCarousel(true), 140);
+  }, { passive: true });
+  window.addEventListener("resize", () => updateServicesCarousel(true));
+  updateServicesCarousel(true);
+}
+
 const equipmentGallery = document.querySelector(".equipment-gallery");
 if (equipmentGallery) {
   const galleryImages = [...equipmentGallery.querySelectorAll("img")];
