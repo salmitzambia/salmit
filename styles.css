@@ -725,10 +725,11 @@ h1, h2, h3, h4, .brand-name { font-family: "IBM Plex Sans", "Segoe UI", system-u
 
 /* Scatter style equipment gallery and image lightbox */
 .gallery-details { margin-top: 22px; }
-.gallery-details summary { display: inline-flex; align-items: center; gap: 11px; padding: 11px 15px; border: 1px solid #b6dbe5; border-radius: 5px; background: #fff; color: var(--navy); cursor: pointer; font-size: 12px; font-weight: 750; list-style: none; transition: border-color .18s, background .18s, transform .18s; }
+.gallery-details summary { display: inline-flex; align-items: center; gap: 11px; padding: 12px 17px; border: 1px solid var(--blue); border-radius: 5px; background: var(--blue); color: #fff; cursor: pointer; font-size: 12px; font-weight: 750; list-style: none; box-shadow: 0 7px 18px rgba(20,104,216,.22); transition: border-color .18s, background .18s, transform .18s, box-shadow .18s; }
 .gallery-details summary::-webkit-details-marker { display: none; }
-.gallery-details summary::after { color: var(--blue); content: "+"; font-size: 18px; font-weight: 500; line-height: 1; }
-.gallery-details summary:hover { transform: translateY(-1px); border-color: var(--blue); background: #f3fbfd; }
+.gallery-details summary::after { color: var(--cyan); content: "+"; font-size: 18px; font-weight: 500; line-height: 1; }
+.gallery-details summary:hover { transform: translateY(-1px); border-color: #0f56ba; background: #0f56ba; box-shadow: 0 10px 23px rgba(20,104,216,.3); }
+.gallery-details summary:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
 .gallery-details[open] summary::after { content: "−"; }
 .equipment-gallery-intro { margin: 0 0 13px !important; color: var(--muted) !important; font-size: 11px !important; }
 .equipment-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 25px 20px; align-items: start; margin: 22px 0 26px; }
