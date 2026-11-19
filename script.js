@@ -208,22 +208,30 @@ if (quoteForm) {
     if (data.get("timeframe")) lines.push(`Preferred timeframe: ${data.get("timeframe")}`);
     lines.push(`Service: ${data.get("service")}`, `Project details: ${data.get("details")}`);
 
-    const whatsappUrl = `https://wa.me/260770336134?text=${encodeURIComponent(lines.join("\n"))}`;
+    const requestMessage = lines.join("\n");
+    const whatsappUrl = `https://wa.me/260770336134?text=${encodeURIComponent(requestMessage)}`;
+    const emailUrl = `mailto:salmitzambia@gmail.com?subject=${encodeURIComponent("Quotation request for Salmit Zambia")}&body=${encodeURIComponent(requestMessage)}`;
     const status = document.getElementById("quote-status");
     const opened = window.open(whatsappUrl, "_blank");
-    if (opened) {
-      opened.opener = null;
-      status.textContent = "WhatsApp is ready with your request. Review the details and press send to submit it.";
-      return;
-    }
+    if (opened) opened.opener = null;
 
-    const message = document.createTextNode("Your request is ready. ");
-    const link = document.createElement("a");
-    link.href = whatsappUrl;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.textContent = "Open your WhatsApp message";
-    status.replaceChildren(message, link, document.createTextNode(" and press send to submit."));
+    const whatsappLink = document.createElement("a");
+    whatsappLink.href = whatsappUrl;
+    whatsappLink.target = "_blank";
+    whatsappLink.rel = "noopener noreferrer";
+    whatsappLink.textContent = opened ? "Open WhatsApp again" : "Continue in WhatsApp";
+    const emailLink = document.createElement("a");
+    emailLink.href = emailUrl;
+    emailLink.textContent = "Prepare an email instead";
+    status.replaceChildren(
+      document.createTextNode(opened
+        ? "WhatsApp is ready with your request. Review it and press send, or use email instead: "
+        : "Your request is ready. Choose how you would like to send it: "),
+      whatsappLink,
+      document.createTextNode(" or "),
+      emailLink,
+      document.createTextNode(". Review the message before sending.")
+    );
   });
 }
 

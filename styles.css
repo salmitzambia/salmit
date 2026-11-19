@@ -770,6 +770,10 @@ h1, h2, h3, h4, .brand-name { font-family: "IBM Plex Sans", "Segoe UI", system-u
 @media (prefers-reduced-motion: reduce) {
   .equipment-gallery-item, .equipment-gallery-item img { transition: none; }
 }
+.form-status { line-height: 1.65; }
+.form-status a { display: inline-flex; align-items: center; margin: 3px 2px; padding: 6px 9px; border: 1px solid #c6dfd0; border-radius: 4px; background: #fff; color: #145c38; font-size: 11px; font-weight: 750; text-decoration: none; }
+.form-status a:hover { border-color: #7ebd96; background: #f7fcf8; text-decoration: underline; text-underline-offset: 3px; }
+.form-status a:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
 .service-block li::before { top: 11px; left: 2px; display: grid; width: 18px; height: 18px; place-items: center; border: 1px solid #bceef5; border-radius: 50%; background: #e6faff; color: var(--blue); font-size: 10px; font-weight: 900; content: "✓"; }
 
 /* Premium IT equipment section */
