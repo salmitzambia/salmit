@@ -109,7 +109,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .capability-stories-heading > div { max-width: 650px; }
 .capability-stories-heading h2 { max-width: 590px; }
 .capability-stories-lede { max-width: 600px; margin: 14px 0 0; color: var(--muted); font-size: 15px; }
-.capability-story-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.capability-story-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .capability-story { min-width: 0; overflow: hidden; border: 1px solid #e1e8ef; border-radius: 11px; background: white; color: inherit; text-decoration: none; box-shadow: 0 10px 30px rgba(8,30,61,.055); transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
 .capability-story:hover { transform: translateY(-5px); border-color: #b5d9e3; box-shadow: 0 18px 42px rgba(8,30,61,.12); }
 .capability-story-image { position: relative; overflow: hidden; aspect-ratio: 1.55; padding: 16px 22px; background: radial-gradient(ellipse at 50% 48%, #fff 0%, #dff8fc 54%, #dce9ff 100%); }
@@ -461,7 +461,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .footer-main > p { display: none; }
   .values-section { gap: 54px; }
   .capability-story-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .capability-story:last-child { grid-column: 1 / -1; }
   .client-strip { grid-template-columns: 1fr auto; gap: 18px 24px; }
   .client-strip-list { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; }
   .client-strip-link { grid-column: 2; grid-row: 1; }
