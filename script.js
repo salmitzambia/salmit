@@ -281,7 +281,7 @@ onlineChat.querySelector("#online-chat-form").addEventListener("submit", (event)
 
 // Add the GA4 Measurement ID and Clarity Project ID for Salmit's analytics accounts.
 const GA4_MEASUREMENT_ID = "G-W34JP7VW98";
-const CLARITY_PROJECT_ID = "";
+const CLARITY_PROJECT_ID = "zg20rvawcj";
 const ANALYTICS_CONSENT_KEY = "salmit-analytics-consent";
 
 const hasGA4 = /^G-[A-Z0-9]+$/.test(GA4_MEASUREMENT_ID);
