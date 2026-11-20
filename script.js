@@ -2,9 +2,15 @@ document.querySelectorAll("#year").forEach((year) => {
   year.textContent = new Date().getFullYear();
 });
 
+const normalizePath = (pathname) => {
+  const path = pathname.replace(/\/+$/, "") || "/";
+  return path === "/" ? "/index.html" : path;
+};
+const currentPath = normalizePath(window.location.pathname);
+
 document.querySelectorAll(".site-nav a[href], .header-cta[href]").forEach((link) => {
   const target = new URL(link.href, window.location.href);
-  if (target.pathname === window.location.pathname) {
+  if (normalizePath(target.pathname) === currentPath) {
     link.setAttribute("aria-current", "page");
   } else {
     link.removeAttribute("aria-current");

@@ -153,7 +153,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .contact-banner > div > p:last-child { margin: 9px 0 0; color: var(--muted); font-size: 13px; }
 
 /* Interior pages */
-.interior-main { display: flex; flex: 1; flex-direction: column; background: radial-gradient(ellipse at 8% 14%, rgba(66,196,223,.15), transparent 30%), radial-gradient(ellipse at 92% 78%, rgba(243,184,80,.1), transparent 28%), linear-gradient(135deg, #eaf4f9 0%, #f4f7fb 48%, #edf5f3 100%); }
+.interior-main { display: flex; flex: 1; flex-direction: column; background: radial-gradient(ellipse at 8% 12%, rgba(20,104,216,.075), transparent 32%), radial-gradient(ellipse at 94% 82%, rgba(50,217,241,.09), transparent 30%), linear-gradient(135deg, #f3f7fc 0%, #edf4fa 52%, #f5f8fc 100%); }
 .standalone-layout { width: min(1200px, calc(100% - 48px)); min-height: 0; flex: 1; margin: auto; display: grid; place-items: center; padding: 62px 0; }
 .standalone-card { width: min(100%, 760px); padding: clamp(30px, 5vw, 58px); border: 1px solid rgba(210,223,235,.9); border-radius: 12px; background: rgba(255,255,255,.96); box-shadow: 0 20px 55px rgba(8,30,61,.11); }
 .content-heading { display: flex; align-items: center; gap: 13px; }
