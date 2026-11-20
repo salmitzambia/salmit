@@ -245,7 +245,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .contact-details-heading h2 { margin: 0; color: var(--navy); font-size: clamp(33px, 4vw, 47px); line-height: 1.12; letter-spacing: -1.5px; }
 .contact-details-heading > p { max-width: 330px; margin: 0 0 4px; color: var(--muted); font-size: 13px; line-height: 1.7; }
 .contact-details-grid { display: grid; grid-template-columns: 1.8fr .8fr; align-items: stretch; gap: 15px; }
-.contact-details-grid .contact-options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+.contact-details-grid .contact-options { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; }
 .contact-details-grid .contact-option { min-height: 142px; padding: 18px 20px; border-radius: 8px; background: #fff; box-shadow: 0 8px 24px rgba(8,30,61,.045); }
 .contact-details-grid .contact-option:hover { transform: translateY(-3px); border-color: #93d6e6; box-shadow: 0 14px 30px rgba(8,30,61,.09); }
 .contact-option-label { display: flex; align-items: center; gap: 8px; color: #52667d !important; font-size: 9px !important; letter-spacing: 1.1px; }
